@@ -1,5 +1,5 @@
-import { BookService } from './../book.service';
-import { Component, OnInit } from '@angular/core';
+import {BookService} from './../book.service';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-readed-book',
@@ -9,10 +9,25 @@ import { Component, OnInit } from '@angular/core';
 export class ReadedBookComponent implements OnInit {
   books: any[];
 
-  constructor(private bookService: BookService) { }
-
-  ngOnInit(): void {
-    this.bookService.findAll().subscribe(result => { this.books = result; });
+  constructor(private bookService: BookService) {
   }
 
+  ngOnInit(): void {
+    this.bookService.findAll().subscribe(
+      result => {
+        this.books = result;
+      });
+  }
+
+  change(book: any) {
+    this.bookService.change(book.id, book.name, book.read).subscribe(
+      result => {
+        alert('Đọc lại');
+        this.ngOnInit();
+      },
+      error => {
+        alert('Thất bại');
+      }
+    );
+  }
 }

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 export class BookService {
   url = 'http://localhost:8081/books';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   findAll(): Observable<any[]> {
     return this.httpClient.get<any[]>(this.url);
@@ -20,5 +21,14 @@ export class BookService {
       read
     };
     return this.httpClient.post<any>(this.url, book);
+  }
+
+  change(id: number, name: string, read: string): Observable<any> {
+    const book = {
+      id,
+      name,
+      read
+    };
+    return this.httpClient.put<any>(this.url, book);
   }
 }

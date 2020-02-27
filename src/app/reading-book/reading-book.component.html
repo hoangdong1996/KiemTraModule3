@@ -20,10 +20,10 @@
             </td>
         </tr>
     </thead>
-    <tbody *ngFor="let item of books">
-        <tr *ngIf="item.read == false">
-            <td>{{item.name}}</td>
-            <td><button class="btn btn-primary" >Đã đọc</button></td>
+    <tbody *ngFor="let i of books">
+        <tr *ngIf="i.read == false">
+            <td>{{i.name}}</td>
+            <td><button class="btn btn-primary" (click)="change(i)">Đã đọc</button></td>
         </tr>
     </tbody>
 </table>

@@ -7,10 +7,10 @@
             </td>
         </tr>
     </thead>
-    <tbody *ngFor="let item of books">
-        <tr *ngIf="item.read == true">
-            <td>{{item.name}}</td>
-            <td><button class="btn btn-primary">Đã đọc</button></td>
+    <tbody *ngFor="let i of books">
+        <tr *ngIf="i.read == true">
+            <td>{{i.name}}</td>
+            <td><button class="btn btn-primary" (click)="change(i)">Đọc lại</button></td>
         </tr>
     </tbody>
 </table>

@@ -1,7 +1,7 @@
-import { BookService } from './../book.service';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
+import {BookService} from './../book.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {analyzeAndValidateNgModules} from '@angular/compiler';
 
 @Component({
   selector: 'app-reading-book',
@@ -15,7 +15,8 @@ export class ReadingBookComponent implements OnInit {
     name: new FormControl()
   });
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService) {
+  }
 
   ngOnInit(): void {
     this.bookService.findAll().subscribe(result => {
@@ -26,12 +27,24 @@ export class ReadingBookComponent implements OnInit {
   save() {
     const name = this.form.get('name').value;
     this.bookService.save(name, false).subscribe(
-      success => {
+      result => {
         alert('Thêm thành công!!');
         this.ngOnInit();
       },
       error => {
         alert('Thêm thất bại');
+      }
+    );
+  }
+
+  change(book: any) {
+    this.bookService.change(book.id, book.name, 'true').subscribe(
+      result => {
+        alert('Đã đọc');
+        this.ngOnInit();
+      },
+      error => {
+        alert('Chưa đọc');
       }
     );
   }
